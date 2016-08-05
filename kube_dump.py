@@ -46,8 +46,8 @@ def get_server(kubeconfig_path):
 
     return {
         'url_base': cluster['cluster']['server'],
-        'username': user['user']['username'],
-        'password': user['user']['password'],
+        'username': user['user'].get('username'),
+        'password': user['user'].get('password'),
     }
 
 
@@ -75,7 +75,7 @@ def remove_metadata(item, extra=()):
         ('metadata', 'creationTimestamp'),
     )
 
-    to_del += extra
+    to_del += (extra, )
 
     for part in to_del:
         try:
